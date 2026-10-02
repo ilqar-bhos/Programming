@@ -1,0 +1,5 @@
+winget install --id Git.Git -e --source winget
+restart vs code
+
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+npm install prompt-sync
