@@ -1,0 +1,65 @@
+Columns:
+order_id – unique order identifier
+customer_id – unique customer identifier
+country – customer country
+product_category – category of purchased product
+unit_price – price per unit
+quantity – number of units purchased
+discount – discount percentage (0–30)
+order_date – date of purchase
+delivery_days – number of days for delivery
+
+
+Task 1: Data Loading
+1.1.Load the dataset.
+1.2.Display the first 10 rows of the dataset.
+1.3.Print the shape of the dataset.
+1.4.Display column names and data types.
+1.5.Check for missing values in each column.
+
+Task 2: Basic Data Cleaning
+2.1.Check whether there are duplicate order_id values.
+2.2.Remove duplicate records if any exist.
+2.3.Ensure that discount values are between 0 and 30.
+2.4.Verify that quantity and unit_price are positive.
+2.5.Any anomalies you find.(optional)
+
+Task 3: Descriptive Statistics
+3.1.Compute mean, median, and standard deviation for unit_price, quantity, and delivery_days.
+3.2.Find the minimum and maximum delivery time.
+3.3.Group the data by country and calculate the average unit price.
+3.4.Group the data by product_category and compute total quantity sold.
+
+Task 4: Data Visualization
+4.1.Plot a histogram of unit_price.
+4.2.Create a boxplot of delivery_days by country.
+4.3.Plot a scatter plot of unit_price vs quantity.
+4.4.Create a bar chart showing total sales quantity by product_category.
+
+Task 5: Feature Engineering
+5.1.Create a new feature called total_revenue:
+total_revenue = unit_price * quantity * (1 - discount / 100)
+5.2.Create a feature order_month extracted from order_date.
+5.3.Create a binary feature fast_delivery:
+    1 if delivery_days ≤ 5
+    0 otherwise
+5.4.Encode the product_category column using an appropriate encoding method.
+
+Task 6: Correlation Analysis
+6.1.Compute the correlation matrix for numerical features.
+6.2.Visualize the correlation matrix using a heatmap.
+6.3.Identify the two features most correlated with total_revenue.
+
+Task 7: Train–Test Split
+7.1.Define the target variable as total_revenue.
+7.2.Select appropriate input features.
+7.3.Split the dataset into training and testing sets (80/20).
+
+Task 8: Regression Modeling
+8.1.Train a Linear Regression model to predict total_revenue.
+8.2.Evaluate the model using:
+    Mean Absolute Error (MAE)
+    Mean Squared Error (MSE)
+    R² score
+
+Explain how feature scaling could affect model performance.
