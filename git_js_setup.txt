@@ -6,3 +6,5 @@ ferqi yoxdur bunun name email
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 npm install prompt-sync
+
+setting->wrap->on
