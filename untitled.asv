@@ -1,0 +1,16 @@
+clc;
+n=128000;
+mean=50;
+sigma=3;
+x=rand(1,n);
+subplot(211);plot(x(1:100));grid on;title('Random signal');
+subplot(212);hist(x,200);grid on;title('Histogram of the Random signal');
+figure
+x_sum=0;
+for index = 1:12
+    x_sum=x_sum+rand(1,n);
+    subplot(4,3,index);
+    hist(x_sum,200);
+end
+figure
+x_res=(x_sum-6)*
