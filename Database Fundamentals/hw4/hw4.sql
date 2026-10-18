@@ -55,22 +55,17 @@ AS dense_rank
 WITH ranked_salary AS (
 select name, salary, dep_id, rank() OVER (PARTITION BY dep_id order by salary desc) AS dep_salary from l4.employee
 )
-select name, salary, dep_id rank()
-from ranked_salary;
+select name, salary, dep_id, dep_salary from ranked_salary order by dep_id asc, dep_salary asc;
 
+-- ALTER TABLE l4.employee ADD COLUMN hire_date int;
+-- Update l4.employee set hire_date=2020 where dep_id=1;
+-- Update l4.employee set hire_date=2021 where dep_id=2;
+-- Update l4.employee set hire_date=2023 where dep_id=3;
+-- Update l4.employee set hire_date=2024 where dep_id=4;
+-- Update l4.employee set hire_date=2025 where dep_id=5;
+select name, salary, dep_id, hire_date, SUM(salary) OVER(PARTITION by hire_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) from l4.employee;
 
-------------------------
-select dep_id, max(age) as highest_age, min(age) as lowest_age, max(age)-min(age) as difference_between_age
-from l4.employee 
-group by dep_id 
-having max(age)-min(age)>2; --used 2 instead of 10
-
-WITH department_salary AS (
-select name, salary, dep_id, avg(salary) OVER (PARTITION BY dep_id) AS dep_salary from l4.students
-)
-select name, salary, dep_id, dep_salary
-from department_salary
-where salary>dep_salary;
+select dep_id, AVG(salary) from l4.employee where hire_date > 2022 group by dep_id having AVG(salary) > 750;
 
 
 
