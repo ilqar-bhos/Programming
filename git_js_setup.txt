@@ -3,6 +3,10 @@ restart vs code
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ferqi yoxdur bunun name email
+cmdkey /delete:LegacyGeneric:target=git:https://github.com
+git push origin main
+
+
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 npm install prompt-sync
