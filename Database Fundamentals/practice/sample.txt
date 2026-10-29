@@ -1,0 +1,57 @@
+create table test.departments (dept_id serial primary key, dept_name varchar(55), city varchar(55));
+
+create table test.employees (
+emp_id serial primary key,
+ name varchar(55),
+ age int,
+ email varchar(55),
+ salary int,
+ dept_id int,
+ foreign key(dept_id) references test.departments,
+ manager_id int,
+ foreign key(emp_id) references test.employees,
+ hire_date date
+);
+
+2)
+a.
+create table test.projects (project_id serial primary key, title varchar(60) not null,
+ budget numeric(2,10), start_date date, dept_id int, foreign key(dept_id) references test.departments);
+b.
+ ALTER table test.projects add column status varchar(20) default 'planned';
+
+3)
+a
+select name as employee_name, salary, hire_date from test.employees where 
+dept_id IN(10,20,30,40) and
+ (salary between 2500 and 5000) and
+email is not null and 
+name not like 'A%' 
+order by salary desc,name asc 
+limit 3;
+b
+select distinct city from test.departments order by city asc;
+
+4)
+a 
+select e.name, d.dept_name, d.city from test.employees e INNER JOIN test.departments d ON e.dept_id=d.dept_id order by e.name asc;
+b 
+select d.dept_name from test.departments d left join test.employees e on d.dept_id=e.dept_id where e.emp_id is null;
+
+5)
+a
+select name, salary from test.employees where salary>(select AVG(salary) from test.employees) order by salary desc;
+b 
+select dept_name from test.departments d where exists
+ (select 1 from test.employees e where e.dept_id=d.dept_id and salary>4000) 
+ order by dept_name asc;
+
+6)
+a 
+select dept_id, COUNT(*) as total_employees, ROUND(AVG(salary), 1) from test.employees
+ where age>26 group by dept_id having COUNT(*) > 1 order by AVG(salary) desc;
+b 
+select name, salary, row_number() over(order by salary desc, name) as row_num, 
+rank() over(order by salary desc) as rank, 
+dense_rank() over(order by salary desc) as dense_rnk 
+from test.employees order by salary desc, name;
