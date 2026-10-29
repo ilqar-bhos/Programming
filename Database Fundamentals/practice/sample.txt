@@ -51,7 +51,7 @@ a
 select dept_id, COUNT(*) as total_employees, ROUND(AVG(salary), 1) from test.employees
  where age>26 group by dept_id having COUNT(*) > 1 order by AVG(salary) desc;
 b 
-select name, salary, row_number() over(order by salary desc, name) as row_num, 
+select name, salary, row_number() over(order by salary desc, name asc) as row_num, 
 rank() over(order by salary desc) as rank, 
 dense_rank() over(order by salary desc) as dense_rnk 
 from test.employees order by salary desc, name;
