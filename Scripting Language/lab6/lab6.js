@@ -29,9 +29,49 @@ function describeBook(book){
 for(let i of books){
     console.log(describeBook(i));
 }
-
+console.log("_______________________");
 function findBooks(books, callback) {
-    const check = callback(books);
-    console.log(check);
+    const results = [];
+    for(let book of books){
+        if(callback(book)){
+            results.push(book);
+        }
+    }
+    return results;
 }
-findBooks(books, b => b.available && b.year > 1900);
+console.log(findBooks(books, b => b.available && b.year > 1900));
+
+function createLibrary(){
+   let private_books = [];
+   return {
+        addBook(book) {
+            private_books.push(book);
+        },
+        borrowBook(title) {
+            for(let book of private_books){
+                if(book.title==title){
+                    book.available = false;
+                }
+            }
+        },
+        getAvailable() {
+            let books_available=[];
+            for(let book of private_books){
+                if(book.available){
+                    books_available.push(book);
+                }
+            }
+            return books_available;
+        }
+   }
+}
+let myLib = createLibrary();
+myLib.addBook({ title: "Dede Qorqud", pages: 220, year: 1300, available: true });
+myLib.addBook({ title: "Sahib-i Zaman", pages: 180, year: 1912, available: true });
+myLib.addBook({ title: "Sahib-i Zaman 2", pages: 180, year: 1912, available: true });
+console.log("Available books for new myLib:")
+console.log(myLib.getAvailable());
+console.log("Borrowing book Sahib-i Zaman 2")
+myLib.borrowBook("Sahib-i Zaman 2");
+console.log("Available books for new myLib:")
+console.log(myLib.getAvailable());
