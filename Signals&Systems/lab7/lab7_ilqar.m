@@ -9,15 +9,17 @@ subplot(711); plot(t,x);title("My Input Signal");
 X=fft(x,n);
 fd=fs*(0:n/2-1)/n;
 
-subplot(712); plot(fd,X(1:n/2));title("My fft Signal");
+subplot(712); plot(fd,real(X(1:n/2)));title("My fft Signal");
 subplot(713); plot(fd,abs(X(1:n/2)));title("My abs fft Signal");
 subplot(714); plot(fd,angle(X(1:n/2)));title("My angle fft Signal");
 
     
 X2 = zeros(1, n);
-for index = 1:n
-    X2(index)=x(index)*(cos(2*pi*index/n)+1i*cos(2*pi*index/n));
+for index = 0:n-1
+    for index2 = 0:n-1
+        X2(index+1)= X2(index+1) + x(index2+1)*(cos(2*pi*index2*index/n)-1i*sin(2*pi*index2*index/n));
+    end
 end
-subplot(715); plot(fd,X2(1:n/2));title("My dft Signal");
-subplot(716); plot(fd,abs(X2(1:n/2)));title("My abs dft Signal");
+subplot(715); plot(fd,real(X2(1:n/2)));title("My dft Signal");
+subplot(716); plot(fd,abs(X2(1:n/2)));title("My abs dft Signal"); 
 subplot(717); plot(fd,angle(X2(1:n/2)));title("My angle dft Signal");
