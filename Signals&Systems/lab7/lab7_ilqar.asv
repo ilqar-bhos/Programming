@@ -1,0 +1,15 @@
+clc;
+fs=3*120;
+ts=1/fs;
+t=0:ts:1;
+n=length(t);
+noise=rand(1,length(t));
+x=sin(2*pi*50*t) + 0.7*sin(2*pi*100*t)+0.5*sin(2*pi*120*t)+noise;
+subplot(411); plot(t,x);title("My Input Signal");
+X=fft(x,n);
+fd=fs*(0:n/2-1)/n;
+
+subplot(412); plot(fd,X(1:n/2));title("My fft Signal");
+subplot(413); plot(fd,abs(X(1:n/2)));title("My abs fft Signal");
+subplot(414); plot(fd,angle(X(1:n/2)));title("My angle fft Signal");
+fo
